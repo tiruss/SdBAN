@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 - Download pretrained weight from the link 
 
-- [[Google drive]](https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing) [[Baidu drive]]()
+- [[Google drive]](https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing) [[Baidu drive]]() Baidu drive will be updated soon.
 
 - Run test.py
 ```
