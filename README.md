@@ -2,7 +2,11 @@
 
 Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using Bilateral Attention Network with Dice Coefficient Loss"
 
+- Qualitative Evaluation
+
 <img src="readme_image/Visual.png">
+
+- Quantative Eavaluation
 
 <img src="readme_image/quantative.PNG">
 
