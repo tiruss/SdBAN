@@ -33,5 +33,9 @@ http://saliencydetection.net/duts/download/DUTS-TR.zip
 - Download pretrained weight from the link 
 - Google drive (https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing)
 - Baidu drive ()
+- Run test.py
+```
+python test.py --weight [pretrained weight] --input_dir ["test_img_dir"] --output_folder "outputs"
+```
 
 Details will be updated soon. 
