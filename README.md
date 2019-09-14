@@ -42,8 +42,11 @@ python test.py --weight [pretrained weight] --input_dir [test_img_dir] --output_
 - Pre-computed salinecy maps can download from the link
 
 ### Train from scratch
+
 - DUTS-TR is our traning set for pair comparison
+
 - Run train.py
+
 ```
 python train.py --img_folder [DUTS-TR img dir] --label_folder [DUTS-TR label dir] --epoch --batch_size --num_gpu
 ```
