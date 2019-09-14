@@ -6,6 +6,14 @@ Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using 
 
 <img src="readme_image/PR_F_curve.png">
 
+## Getting Started
+### Installation
+
+- Clone thos repository
+'''
+
+'''
+
 Pretrained weight : https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing
 
 Details will be updated soon. 
