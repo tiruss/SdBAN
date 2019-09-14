@@ -10,10 +10,12 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.utils import multi_gpu_model
 
-from skimage.transform import resize, rotate
-from skimage.io import imread, imsave
+from skimage.transform import resize
+from skimage.io import imread
 
-class BASNet():
+from utils import *
+
+class SdBAN():
     def __init__(self):
         # Input shape
 
@@ -25,19 +27,19 @@ class BASNet():
     def build_model(self):
 
         def DeConv(output_filter, last_layer, skip, skip_layer):
-            l = Conv2DTranspose(filters=last_layer.get_shape().as_list()[-1],
+            l1 = Conv2DTranspose(filters=last_layer.get_shape().as_list()[-1],
                                       kernel_size=(3, 3), strides=(2, 2), padding="same")(last_layer)
-            l = BatchNormalization()(l)
-            l = Activation("relu")(l)
+            b1 = BatchNormalization()(l1)
+            a1 = Activation("relu")(b1)
 
             if skip:
-                skip_layer = concatenate([skip_layer, l], axis=-1)
+                skip_layer = concatenate([skip_layer, l1], axis=-1)
 
-            l = Conv2D(filters=output_filter, kernel_size=(1, 1), padding="same")(skip_layer)
-            l = BatchNormalization()(l)
-            l = Activation("relu")(l)
+            l2 = Conv2D(filters=output_filter, kernel_size=(1, 1), padding="same")(skip_layer)
+            l2 = BatchNormalization()(l2)
+            l2 = Activation("relu")(l2)
 
-            return l
+            return l2
 
         def Attention_Module(inputs):
             GAP = Lambda(lambda x: tf.reduce_mean(x, [1, 2], keepdims=True))(inputs)
@@ -115,60 +117,40 @@ class BASNet():
 
         return Model(inputs=input, outputs=[output])
 
-    def train(self, epoch=200, batch_size=16, gpu=1):
+    def preprocessing_data(self, img, label, batch_size, input_shape = (224, 224)):
 
-        def random_crop(img, mask, width, height):
-            x = random.randint(0, img.shape[1] - width)
-            y = random.randint(0, img.shape[0] - height)
+        batch_img = np.zeros((batch_size, input_shape[0], input_shape[1], 3))
+        batch_label = np.zeros((batch_size, input_shape[0], input_shape[1], 1))
 
-            new_img = img[y:y + height, x:x + width, :]
-            new_mask = mask[y:y + height, x:x + width, :]
+        while True:
+            for i in range(batch_size):
+                index = int(np.random.choice(len(img), 1))
 
-            ratio = random.random()
+                image = resize(imread(img[index]), (256, 256, 3))
+                mask = resize(np.expand_dims(imread(label[index]), -1), (256, 256, 1))
 
-            if ratio > 0.5:
-                new_img = new_img[:, ::-1, :]
-                new_mask = new_mask[:, ::-1, :]
+                batch_img[i], batch_label[i] = random_crop(image, mask, input_shape[0], input_shape[1])
 
-            return new_img, new_mask
+            yield batch_img, batch_label
 
-        def generator(images, masks, batch_size, input_width=224, input_height=224):
+    def train(self, epoch=200, batch_size=16, gpu=1, img_dir=None, label_dir=None):
 
-            batch_image = np.zeros((batch_size, input_width, input_height, 3))
-            batch_mask = np.zeros((batch_size, input_width, input_height, 1))
+        img_list = sorted(glob.glob(img_dir+"*.jpg"))
+        label_list = sorted(glob.glob(label_dir+"*.png"))
 
-            while True:
-                for i in range(batch_size):
-                    index = int(np.random.choice(len(images), 1))
+        print("Total training sets: ", len(img_list))
 
-                    img = imread(images[index])
-                    mask = imread(masks[index])
-                    mask = np.expand_dims(mask, -1)
-
-                    img = resize(img, (256, 256, 3))
-                    mask = resize(mask, (256, 256, 1))
-
-                    width, height = 224, 224
-
-                    batch_image[i], batch_mask[i] = random_crop(img, mask, 224, 224)
-
-                yield batch_image, batch_mask
-
-        img = sorted(glob.glob("datasets/duts_dataset/DUTS-TR/DUTS-TR-Image/*.jpg"))
-        mask = sorted(glob.glob("datasets/duts_dataset/DUTS-TR/DUTS-TR-Mask/*.png"))
-
-        # Data Loading..
         train_img, val_img = [], []
         train_mask, val_mask = [], []
-        for i, v in enumerate(img):
-            index = random.randint(0, len(img) - 1)
+        for i, v in enumerate(img_list):
+            index = random.randint(0, len(img_list) - 1)
 
             if i < 9000:
-                train_img.append(img[index])
-                train_mask.append(mask[index])
+                train_img.append(img_list[index])
+                train_mask.append(label_list[index])
             else:
-                val_img.append(img[index])
-                val_mask.append(mask[index])
+                val_img.append(img_list[index])
+                val_mask.append(label_list[index])
 
         # Dice Loss
         def dice_coeff(y_true, y_pred):
@@ -198,21 +180,16 @@ class BASNet():
 
         model.compile(optimizer=adam, loss=bce_dice_loss, metrics=["mae"])
 
-        file_path = "BASNet_708_.{epoch:02d}.hdf5"
+        file_path = "SdBAN_.{epoch:02d}.hdf5"
 
-        callback = ModelCheckpoint(filepath=file_path, monitor="val_mean_absolute_error", save_weights_only=True,
-                                   save_best_only=True)
+        callback = ModelCheckpoint(filepath=file_path, monitor="val_mean_absolute_error", save_weights_only=True, period=20)
 
-        model.fit_generator(generator=generator(train_img, train_mask, batch_size),
+        model.fit_generator(generator=self.preprocessing_data(train_img, train_mask, batch_size),
                             steps_per_epoch=len(train_img) // batch_size,
-                            validation_data=generator(val_img, val_mask, batch_size),
+                            validation_data=self.preprocessing_data(val_img, val_mask, batch_size),
                             validation_steps=len(val_img) // batch_size,
                             epochs=epoch, callbacks=[callback])
 
-
-if __name__ == "__main__":
-    BASNet = BASNet()
-    BASNet.train(epoch=200, batch_size=18, gpu=2)
 
 
 
