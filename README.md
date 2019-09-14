@@ -26,6 +26,12 @@ pip install -r requirements.txt
 http://saliencydetection.net/duts/download/DUTS-TR.zip
 ```
 
-Pretrained weight : https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing
+- Download [HKU-IS] for test from the link (https://sites.google.com/site/ligb86/hkuis)
+
+### Run experiments from pretrained weight
+
+- Download pretrained weight from the link 
+- Google drive (https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing)
+- Baidu drive ()
 
 Details will be updated soon. 
