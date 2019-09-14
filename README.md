@@ -33,11 +33,11 @@ http://saliencydetection.net/duts/download/DUTS-TR.zip
 ### Run experiments from pretrained weight
 
 - Download pretrained weight from the link 
-- Google drive (https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing)
-- Baidu drive ()
+- [[Google drive]](https://drive.google.com/drive/folders/1uaMF84-0zohQ2rHi9mF3xWX4D4FgmN0Y?usp=sharing)
+- [[Baidu drive]]()
 - Run test.py
 ```
-python test.py --weight [pretrained weight] --input_dir ["test_img_dir"] --output_folder "outputs"
+python test.py --weight [pretrained weight] --input_dir [test_img_dir] --output_folder "outputs"
 ```
 - Pre-computed salinecy maps can download from the link
 
