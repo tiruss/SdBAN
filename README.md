@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ### Download datasets
 
-- Download training datasets [DUTO-TR]
+- Download training datasets [DUTO-TR] from the link (http://saliencydetection.net/duts/download/DUTS-TR.zip)
 ```
 http://saliencydetection.net/duts/download/DUTS-TR.zip
 ```
