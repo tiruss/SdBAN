@@ -28,6 +28,8 @@ http://saliencydetection.net/duts/download/DUTS-TR.zip
 
 - Download [HKU-IS] for test from the link (https://sites.google.com/site/ligb86/hkuis)
 
+- Other datasets can download from the link (https://github.com/ArcherFMY/sal_eval_toolbox) Thank you for the awesome evaluation toolbox!
+
 ### Run experiments from pretrained weight
 
 - Download pretrained weight from the link 
@@ -37,5 +39,5 @@ http://saliencydetection.net/duts/download/DUTS-TR.zip
 ```
 python test.py --weight [pretrained weight] --input_dir ["test_img_dir"] --output_folder "outputs"
 ```
+- Pre-computed salinecy maps can download from the link
 
-Details will be updated soon. 
