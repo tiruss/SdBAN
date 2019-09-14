@@ -45,7 +45,7 @@ python test.py --weight [pretrained weight] --input_dir [test_img_dir] --output_
 ```
 - Pre-computed salinecy maps can download from the link
 
-- [[Google drive]](https://drive.google.com/drive/folders/110VYzGDxBlWijoF_GZ9-w4h2ioRLWSww?usp=sharing) [[Baidu drive]]() Baidu drive will be updated soon.
+- [[Google drive]](https://drive.google.com/open?id=15aWO3ig2XJajUxvjdx8yiGgeo8MNi-Nj) [[Baidu drive]]() Baidu drive will be updated soon.
 
 ### Train from scratch
 
