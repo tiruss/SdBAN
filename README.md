@@ -21,7 +21,7 @@ pip install -r requirements.txt
 
 ### Download datasets
 
-- Download training datasets [DUTO-TR] from the link (http://saliencydetection.net/duts/download/DUTS-TR.zip)
+- Download training datasets [DUTS-TR] from the link (http://saliencydetection.net/duts/download/DUTS-TR.zip)
 ```
 http://saliencydetection.net/duts/download/DUTS-TR.zip
 ```
@@ -40,4 +40,11 @@ http://saliencydetection.net/duts/download/DUTS-TR.zip
 python test.py --weight [pretrained weight] --input_dir [test_img_dir] --output_folder "outputs"
 ```
 - Pre-computed salinecy maps can download from the link
+
+### Train from scratch
+
+- Run train.py
+```
+python train.py --img_folder [train img dir] --label_folder [train label dir] --epoch --batch_size --num_gpu
+```
 
