@@ -2,9 +2,13 @@
 
 Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using Bilateral Attention Network with Dice Coefficient Loss"
 
+### Qualitative Evaluation
+
 <img src="readme_image/Visual.png">
 
-<img scr="readme_image/quantative.JPG">
+### Quantative Eavaluation
+
+<img src="readme_image/quantative.PNG">
 
 <img src="readme_image/PR_F_curve.png">
 
@@ -23,11 +27,11 @@ pip install -r requirements.txt
 
 ### Download datasets
 
-- Download training datasets [DUTS-TR] from the link (http://saliencydetection.net/duts/download/DUTS-TR.zip)
+- Download training datasets [[DUTS-TR]](http://saliencydetection.net/duts/download/DUTS-TR.zip) from the link 
 
-- Download [HKU-IS] for test from the link (https://sites.google.com/site/ligb86/hkuis)
+- Download [[HKU-IS]](https://sites.google.com/site/ligb86/hkuis) for test from the link 
 
-- Other datasets can download from the link (https://github.com/ArcherFMY/sal_eval_toolbox) Thank you for the awesome evaluation toolbox!
+- Other datasets can download from the link [[sal_eval_toolbox]](https://github.com/ArcherFMY/sal_eval_toolbox) Thank you for the awesome evaluation toolbox!
 
 ### Run experiments from pretrained weight
 
