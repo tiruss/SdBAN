@@ -4,7 +4,7 @@ Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using 
 
 ### Qualitative Evaluation
 
-<img src="readme_image/Visual.png">
+<img src="readme_image/qualitative.png">
 
 ### Quantative Eavaluation
 
