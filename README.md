@@ -4,7 +4,7 @@ Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using 
 
 <img src="readme_image/Visual.png">
 
-<img scr="readme_image/quantative.png">
+<img scr="readme_image/quantative.jpg">
 
 <img src="readme_image/PR_F_curve.png">
 
