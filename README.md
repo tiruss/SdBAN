@@ -1,4 +1,4 @@
-# SdBAN: Salient Object Detection Using Bilateral Attention Network with Dice Coefficient Loss
+# SdBAN: Salient Object Detection Using Bilateral Attention Network with Dice Coefficient Loss (IEEE ACCESS) [[Link]](https://ieeexplore.ieee.org/document/9107080)
 
 Tensorflow based keras implementation of "SdBAN: Salient Object Detection Using Bilateral Attention Network with Dice Coefficient Loss"
 
