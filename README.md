@@ -55,3 +55,17 @@ python test.py --weight [pretrained weight] --input_dir [test_img_dir] --output_
 
 ```
 python train.py --img_folder [DUTS-TR img dir] --label_folder [DUTS-TR label dir] --epoch --batch_size --num_gpu
+```
+
+### Citation
+
+```
+@ARTICLE{9107080,
+  author={D. {Kang} and S. {Park} and J. {Paik}},
+  journal={IEEE Access}, 
+  title={SdBAN: Salient Object Detection Using Bilateral Attention Network With Dice Coefficient Loss}, 
+  year={2020},
+  volume={8},
+  number={},
+  pages={104357-104370},}
+```
